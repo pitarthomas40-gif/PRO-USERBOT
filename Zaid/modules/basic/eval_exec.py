@@ -7,7 +7,11 @@ import traceback
 from pyrogram import filters, Client
 from pyrogram.types import Message
 
-from Zaid.database import cli as database
+try:
+    from Zaid.database import cli as database
+except Exception:
+    database = None
+    
 from Zaid.helper.PyroHelpers import ReplyCheck
 
 
