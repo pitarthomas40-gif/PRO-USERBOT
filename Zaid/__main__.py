@@ -4,6 +4,20 @@ from pyrogram import Client, idle
 from Zaid.helper import join
 from Zaid.modules import ALL_MODULES
 from Zaid import clients, app, ids
+from flask import Flask
+import threading
+
+app = Flask(name)
+
+@app.route("/")
+def home():
+    return "Bot is alive!"
+
+def run():
+    app.run(host="0.0.0.0", port=8080)
+
+threading.Thread(target=run).start()
+
 
 async def start_bot():
     await app.start()
