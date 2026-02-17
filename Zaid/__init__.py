@@ -14,17 +14,24 @@ ids = []
 
 SUDO_USERS.append(OWNER_ID)
 
-# --- Error Fix Start ---
-# Python 3.10 में सीधा ClientSession() लिखने से एरर आता है
-# इसलिए हम पहले लूप चेक करते हैं
+# --- पक्का फिक्स: aiosession को डायरेक्ट कॉल नहीं करेंगे ---
+# हम इसे None रखेंगे ताकि बूट होते समय एरर न आए
+aiosession = None 
+
+# एक छोटा सा फंक्शन जो जरूरत पड़ने पर सेशन बना देगा
+async def get_aiosession():
+    global aiosession
+    if aiosession is None:
+        aiosession = ClientSession()
+    return aiosession
+
+# Python 3.10+ के लिए इवेंट लूप फिक्स
 try:
-    loop = asyncio.get_event_loop()
+    asyncio.get_event_loop()
 except RuntimeError:
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-
-aiosession = ClientSession()
-# --- Error Fix End ---
+# -------------------------------------------------------
 
 if API_ID:
    API_ID = API_ID
@@ -76,7 +83,7 @@ if STRING_SESSION5:
    clients.append(client5)
 
 if STRING_SESSION6:
-   print("Client6: Found.. Starting.. 🳳")
+   print("Client6: Found.. Starting.. 📳")
    client6 = Client(name="six", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION6, plugins=dict(root="Zaid/modules"))
    clients.append(client6)
 
@@ -99,4 +106,3 @@ if STRING_SESSION10:
    print("Client10: Found.. Starting.. 📳")
    client10 = Client(name="ten", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION10, plugins=dict(root="Zaid/modules")) 
    clients.append(client10)
-    
