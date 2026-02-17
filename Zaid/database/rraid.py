@@ -1,6 +1,6 @@
-from Zaid.database import cli
+from Zaid.database import dbb as db
 
-collection = cli["Zaid"]["rraid"]
+collection = db.raid
 
 
 async def rraid_user(chat):
