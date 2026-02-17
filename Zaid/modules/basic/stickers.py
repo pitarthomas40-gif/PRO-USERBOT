@@ -565,4 +565,60 @@ async def stick2png(client: Client, message: Message):
         file_io.name = "sticker.png"
 
         await asyncio.gather(
-            message
+            message.delete(),
+            client.send_photo(
+                message.chat.id,
+                file_io,
+                reply_to_message_id=ReplyCheck(message),
+            ),
+        )
+    except Exception as e:
+        return await client.send_message(
+            message.chat.id, f"INFO: {e}", reply_to_message_id=ReplyCheck(message)
+        )
+
+
+add_command_help(
+    "sticker",
+    [
+        [
+            f"kang reply image",
+            f"Reply .kang To Sticker Or Image To Add To Sticker Pack.",
+        ],
+        [
+            f"kang [emoji] or .double [emoji]",
+            f"To add and custom emoji stickers to your sticker pack.\n\n",
+        ],
+        [
+            f"packinfo or` .stickerinfo",
+            "To Get Sticker Pack Information.",
+        ],
+        [
+            f"mtoi [reply ke sticker] or .getsticker [reply ke sticker]",
+            "Reply to sticker to get sticker photo.",
+        ],
+        ["stickers [nama sticker]", "To find sticker packs."],
+    ],
+)
+
+
+add_command_help(
+    "memify",
+    [
+        [
+            "mmf Top Text ; Bottom Text",
+            "Reply To Message Sticker or Photo will be Converted to the specified meme text sticker.",
+        ],
+    ],
+)
+
+
+add_command_help(
+    "tiny",
+    [
+        [
+            "tiny [reply ke photo/sticker]",
+            "To Change the Sticker to be Small.",
+        ],
+    ],
+)
