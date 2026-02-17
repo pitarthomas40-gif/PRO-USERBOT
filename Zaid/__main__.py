@@ -7,14 +7,14 @@ from Zaid import clients, app, ids
 from flask import Flask
 import threading
 
-app = Flask(name)
+app = Flask(__name__)
 
 @app.route("/")
 def home():
     return "Bot is alive!"
 
 def run():
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=10000)
 
 threading.Thread(target=run).start()
 
