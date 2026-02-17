@@ -1,19 +1,15 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 
-# MongoDB URL from environment variable
-MONGO_URL = os.getenv("MONGO_URL")
+MONGO_DB_URI = os.environ.get("MONGO_DB_URI")
 
-if not MONGO_URL:
-    raise ValueError("MONGO_URL environment variable is not set")
+if not MONGO_DB_URI:
+    raise ValueError("MONGO_DB_URI environment variable is not set")
 
-# Create client
-client = AsyncIOMotorClient(MONGO_URL)
+client = AsyncIOMotorClient(MONGO_DB_URI)
 
-# Database name
 db = client["ZaidDB"]
 
-# Collections
 gban = db["gban"]
 gmute = db["gmute"]
 pmpermit = db["pmpermit"]
