@@ -1,6 +1,6 @@
 from Zaid.database import dbb as db
 
-gmuteh = cli["GMUTE"]
+gmuteh = db.gmute
 
 
 async def is_gmuted(sender_id):
@@ -8,7 +8,7 @@ async def is_gmuted(sender_id):
     return bool(kk)
 
 
-async def gmute(sender_id, reason="#GMuted"):
+async def gmute(sender_id, reason="#GMUTED"):
     await gmuteh.insert_one({"sender_id": sender_id, "reason": reason})
 
 
