@@ -1,4 +1,4 @@
-from Zaid.database import cli
+from Zaid.database import dbb as db
 
 gmuteh = cli["GMUTE"]
 
